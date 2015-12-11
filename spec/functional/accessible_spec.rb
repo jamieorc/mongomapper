@@ -109,6 +109,12 @@ describe "Accessible" do
 
       @doc_class.new(:name => 'Steve Sloan').name.should be_nil
     end
+
+    it " should ignore inaccessible attribute on #assign_attributes" do
+      @doc.assign_attributes({:name => 'Ren Hoek', :admin => true})
+      @doc.name.should == 'Ren Hoek'
+      @doc.admin.should be_falsey
+    end
   end
 
   context "Single collection inherited accessible attributes" do
